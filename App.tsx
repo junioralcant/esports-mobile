@@ -12,6 +12,8 @@ import { Home } from './src/screens/Home/Index';
 import { Loading } from './src/components/Loading';
 import { Background } from './src/components/Background';
 
+import { Routes } from './src/routes';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -27,7 +29,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Home /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </Background>
   );
 }
