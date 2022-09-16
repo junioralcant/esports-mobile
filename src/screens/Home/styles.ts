@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    marginBottom: 20,
   },
   logo: {
     width: 214,

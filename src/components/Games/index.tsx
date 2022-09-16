@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   FlatList,
   Image,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -52,61 +53,63 @@ export function Games() {
 
   return (
     <Background>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={handleGoBack}>
-            <Entypo
-              name="chevron-thin-left"
-              color={THEME.COLORS.CAPTION_300}
-            />
-          </TouchableOpacity>
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={handleGoBack}>
+              <Entypo
+                name="chevron-thin-left"
+                color={THEME.COLORS.CAPTION_300}
+              />
+            </TouchableOpacity>
 
-          <Image source={logoImg} style={styles.logo} />
+            <Image source={logoImg} style={styles.logo} />
 
-          <View style={styles.right} />
-        </View>
+            <View style={styles.right} />
+          </View>
 
-        <Image
-          source={{ uri: game.bannerUrl }}
-          style={styles.cover}
-          resizeMode="cover"
-        />
+          <Image
+            source={{ uri: game.bannerUrl }}
+            style={styles.cover}
+            resizeMode="cover"
+          />
 
-        <Heading
-          title={game.title}
-          subtitle="Conecte-se e comece a jogar"
-        />
+          <Heading
+            title={game.title}
+            subtitle="Conecte-se e comece a jogar"
+          />
 
-        <FlatList
-          data={duos}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <DuoCard
-              data={item}
-              onConnect={() => getDiscordUser(item.id)}
-            />
-          )}
-          style={styles.containerList}
-          contentContainerStyle={[
-            duos.length > 0
-              ? styles.contentList
-              : styles.emptyListContent,
-          ]}
-          showsVerticalScrollIndicator={false}
-          horizontal
-          ListEmptyComponent={() => (
-            <Text style={styles.emptyListText}>
-              Não há anuncios publicados ainda.
-            </Text>
-          )}
-        />
+          <FlatList
+            data={duos}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <DuoCard
+                data={item}
+                onConnect={() => getDiscordUser(item.id)}
+              />
+            )}
+            style={styles.containerList}
+            contentContainerStyle={[
+              duos.length > 0
+                ? styles.contentList
+                : styles.emptyListContent,
+            ]}
+            showsVerticalScrollIndicator={false}
+            horizontal
+            ListEmptyComponent={() => (
+              <Text style={styles.emptyListText}>
+                Não há anuncios publicados ainda.
+              </Text>
+            )}
+          />
 
-        <DuoMatch
-          discord={discordDuoSelected}
-          visible={discordDuoSelected.length > 0}
-          onClose={() => setDiscordDuoSelected('')}
-        />
-      </SafeAreaView>
+          <DuoMatch
+            discord={discordDuoSelected}
+            visible={discordDuoSelected.length > 0}
+            onClose={() => setDiscordDuoSelected('')}
+          />
+        </SafeAreaView>
+      </ScrollView>
     </Background>
   );
 }

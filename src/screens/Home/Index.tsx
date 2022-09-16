@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FlatList, Image, View } from 'react-native';
+import { FlatList, Image, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import logoImg from '../../assets/logo-nlw-esports.png';
@@ -32,28 +32,30 @@ export function Home() {
 
   return (
     <Background>
-      <SafeAreaView style={styles.container}>
-        <Image source={logoImg} style={styles.logo} />
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <SafeAreaView style={styles.container}>
+          <Image source={logoImg} style={styles.logo} />
 
-        <Heading
-          title="Não encontrou seu duo?"
-          subtitle="Selecione o game que deseja jogar..."
-        />
+          <Heading
+            title="Não encontrou seu duo?"
+            subtitle="Selecione o game que deseja jogar..."
+          />
 
-        <FlatList
-          data={games}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <GameCard
-              data={item}
-              onPress={() => handleOpenGame(item)}
-            />
-          )}
-          horizontal
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentList}
-        />
-      </SafeAreaView>
+          <FlatList
+            data={games}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <GameCard
+                data={item}
+                onPress={() => handleOpenGame(item)}
+              />
+            )}
+            horizontal
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.contentList}
+          />
+        </SafeAreaView>
+      </ScrollView>
     </Background>
   );
 }
